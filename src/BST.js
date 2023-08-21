@@ -107,20 +107,11 @@ export class Tree {
                 return node;
             }
             // check if the value exists at leaf or the leaf parents
-            else if (value > node.data && node.right === null) {
-                console.log(`${value} not found`)
-                return
-            }
-            else if (value < node.data && node.left === null) {
-                console.log(`${value} not found`)
-                return
-            }
-            else if (value > node.data) {
-                return recursiveFunction(node.right, value);
-            }
-            else if (value < node.data) {
-                return recursiveFunction(node.left, value);
-            }
+            else if (value > node.data && node.right === null) console.log(`${value} not found`)
+            else if (value < node.data && node.left === null) console.log(`${value} not found`)
+            // if node not found, and not at the leaf nodes, recursively go through tree
+            else if (value > node.data) return recursiveFunction(node.right, value)
+            else if (value < node.data) return recursiveFunction(node.left, value)
         }
         recursiveFunction(this.root, value)
     }
@@ -225,25 +216,12 @@ export class Tree {
     // height; find longest length between this node, and leaf node. how? do i need to use find?
     height(value) {
         function recursiveFind(node, value) {
-            if (node.data === value) {
-                console.log(node)
-                return node;
-            }
+            if (node.data === value) return node
             // check if the value exists at leaf or the leaf parents
-            else if (value > node.data && node.right === null) {
-                console.log(`${value} not found`)
-                return
-            }
-            else if (value < node.data && node.left === null) {
-                console.log(`${value} not found`)
-                return
-            }
-            else if (value > node.data) {
-                return recursiveFind(node.right, value);
-            }
-            else if (value < node.data) {
-                return recursiveFind(node.left, value);
-            }
+            else if (value > node.data && node.right === null) console.log(`${value} not found`)
+            else if (value < node.data && node.left === null) console.log(`${value} not found`)
+            else if (value > node.data) return recursiveFind(node.right, value)
+            else if (value < node.data) return recursiveFind(node.left, value)
         }
 
         // recursively traverse the left subtree and find the height, 
@@ -265,7 +243,12 @@ export class Tree {
         else if (rightCounter > leftCounter) return rightCounter
         else return leftCounter
     }
+
+    depth(value) {
+
+    }
 }
+
 
 
 export function buildTree(array) {
