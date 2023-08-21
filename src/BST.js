@@ -262,15 +262,13 @@ export class Tree {
         else return leftCounter
     }
 
+    // might be a terrible implementation, but i think i'm gonna use height of value, and then height of root
     depth(value) {
-        function recursiveFind(node, value) {
-            if (node.data === value) return node
-            else if (value > node.data && node.right === null) console.log(`${value} not found`)
-            else if (value < node.data && node.left === null) console.log(`${value} not found`)
-            else if (value > node.data) return recursiveFind(node.right, value)
-            else if (value < node.data) return recursiveFind(node.left, value)
-        }
-
+        const rootHeight = (this.height(this.root.data))
+        const nodeHeight = (this.height(value))
+        const nodeDepth = rootHeight - nodeHeight;
+        // console.log(nodeDepth)
+        return nodeDepth
     }
 }
 

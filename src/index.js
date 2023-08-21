@@ -35,3 +35,7 @@ newTree.postOrder()
 console.log(
     newTree.height(50)
 )
+
+console.log(
+    newTree.depth(5)
+)
