@@ -218,8 +218,8 @@ export class Tree {
         function recursiveFind(node, value) {
             if (node.data === value) return node
             // check if the value exists at leaf or the leaf parents
-            else if (value > node.data && node.right === null) console.log(`${value} not found`)
-            else if (value < node.data && node.left === null) console.log(`${value} not found`)
+            else if (value > node.data && node.right === null) return
+            else if (value < node.data && node.left === null) return
             else if (value > node.data) return recursiveFind(node.right, value)
             else if (value < node.data) return recursiveFind(node.left, value)
         }
@@ -227,15 +227,23 @@ export class Tree {
         // recursively traverse the left subtree and find the height, 
         // THEN recursively traverse the right subtree and find the height
         // then return the greater of the two heights
+        // TODO: currently no error handling! might need try catch?
         function recursiveTraversalLeft(node, counter) {
-            counter = 0;
-            if (node.left) counter += recursiveTraversalLeft(node.left, counter)+1;
-            return counter;
+            try {
+                counter = 0;
+                if (node.left) counter += recursiveTraversalLeft(node.left, counter)+1;
+                return counter;
+            }
+            catch(err) {return 'value not found'}
+
         }
         function recursiveTraversalRight(node, counter) {
-            counter = 0;
-            if (node.right) counter += recursiveTraversalRight(node.right, counter)+1;
-            return counter;
+            try {
+                counter = 0;
+                if (node.right) counter += recursiveTraversalRight(node.right, counter)+1;
+                return counter;
+            }
+            catch(err) {return 'value not found'}
         }
         const leftCounter = recursiveTraversalLeft(recursiveFind(this.root, value))
         const rightCounter = recursiveTraversalRight(recursiveFind(this.root, value))
@@ -245,6 +253,13 @@ export class Tree {
     }
 
     depth(value) {
+        function recursiveFind(node, value) {
+            if (node.data === value) return node
+            else if (value > node.data && node.right === null) console.log(`${value} not found`)
+            else if (value < node.data && node.left === null) console.log(`${value} not found`)
+            else if (value > node.data) return recursiveFind(node.right, value)
+            else if (value < node.data) return recursiveFind(node.left, value)
+        }
 
     }
 }

@@ -32,5 +32,5 @@ newTree.preOrder()
 newTree.postOrder()
 
 console.log(
-    newTree.height(5)
+    newTree.height(50)
 )
