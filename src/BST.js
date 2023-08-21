@@ -119,11 +119,21 @@ export class Tree {
     levelOrderIterative(helperFunction) {
         let queue = []
         queue.push(this.root)
-        while (queue.length !== 0) {
-            helperFunction(queue[0])
+        if (helperFunction) {
+            while (queue.length !== 0) {
+                helperFunction(queue[0])
+                if (queue[0].left) queue.push(queue[0].left)
+                if (queue[0].right) queue.push(queue[0].right)
+                queue.shift()
+            }
+        } else {
+            let array = []
+            while (queue.length !== 0) {
+            array.push(queue[0]);
             if (queue[0].left) queue.push(queue[0].left)
             if (queue[0].right) queue.push(queue[0].right)
             queue.shift()
+            }
         }
     }
 
@@ -227,7 +237,7 @@ export class Tree {
         // recursively traverse the left subtree and find the height, 
         // THEN recursively traverse the right subtree and find the height
         // then return the greater of the two heights
-        // TODO: currently no error handling! might need try catch?
+        // return error message if value is not found
         function recursiveTraversalLeft(node, counter) {
             try {
                 counter = 0;
