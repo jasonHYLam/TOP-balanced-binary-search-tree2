@@ -222,48 +222,7 @@ export class Tree {
         }
     }
 
-
-    // height; find longest length between this node, and leaf node. how? do i need to use find?
     height(value) {
-        function recursiveFind(node, value) {
-            if (node.data === value) return node
-            // check if the value exists at leaf or the leaf parents
-            else if (value > node.data && node.right === null) return
-            else if (value < node.data && node.left === null) return
-            else if (value > node.data) return recursiveFind(node.right, value)
-            else if (value < node.data) return recursiveFind(node.left, value)
-        }
-
-        // this ONLY works on a balanced tree, not on a unbalanced tree.
-        // recursively traverse the left subtree and find the height, 
-        // THEN recursively traverse the right subtree and find the height
-        // then return the greater of the two heights
-        // return error message if value is not found
-        function recursiveTraversalLeft(node, counter) {
-            try {
-                counter = 0;
-                if (node.left) counter += recursiveTraversalLeft(node.left, counter)+1;
-                return counter;
-            }
-            catch(err) {return 'value not found'}
-
-        }
-        function recursiveTraversalRight(node, counter) {
-            try {
-                counter = 0;
-                if (node.right) counter += recursiveTraversalRight(node.right, counter)+1;
-                return counter;
-            }
-            catch(err) {return 'value not found'}
-        }
-        const leftCounter = recursiveTraversalLeft(recursiveFind(this.root, value))
-        const rightCounter = recursiveTraversalRight(recursiveFind(this.root, value))
-        if (leftCounter > rightCounter) return leftCounter
-        else if (rightCounter > leftCounter) return rightCounter
-        else return leftCounter
-    }
-
-    height2(value) {
         function recursiveFind(node, value) {
             if (node.data === value) return node;
             // check if the value exists at leaf or the leaf parents
@@ -291,11 +250,26 @@ export class Tree {
     }
 
     // subtract nodeHeight from rootHeight to obtain nodeDepth
-    depth(value) {
+    depth2(value) {
         const rootHeight = this.height(this.root.data)
         const nodeHeight = this.height(value)
         const nodeDepth = rootHeight - nodeHeight;
         return nodeDepth
+    }
+
+    depth(value) {
+        // this might be similar to find, need to introduce a counter...!
+        function recursiveTraversal(node, value, counter=0) {
+            if (node.data === value) {
+                return counter
+            }
+            else if (node.left == null && node.right == null) console.log('value not found')
+            else {
+                if (value < node.data) return recursiveTraversal(node.left, value, counter + 1)
+                if (value > node.data) return recursiveTraversal(node.right, value, counter + 1)
+            }
+        }
+        return recursiveTraversal(this.root, value)
     }
 
     // i'm sure this isn't as complicated as i think...

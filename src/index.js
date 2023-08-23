@@ -36,9 +36,9 @@ newTree.postOrder()
 //     newTree.height(50)
 // )
 
-console.log(
-    newTree.height2(6345)
-)
+// console.log(
+//     newTree.height(6345)
+// )
 
 
 
@@ -52,15 +52,15 @@ newTree.insert(321)
 newTree.insert(320)
 newTree.insert(0)
 prettyPrint(newTree.root)
+// console.log(
+//     newTree.height(32477)
+// )
 console.log(
-    newTree.height2(32477)
+    newTree.depth(320)
 )
-console.log(
-    newTree.depth(5)
-)
-console.log(
-    newTree.height2(5)
-)
+// console.log(
+//     newTree.height(5)
+// )
 // console.log(
 //     newTree.isBalanced()
 // )
