@@ -32,10 +32,32 @@ newTree.preOrder()
 
 newTree.postOrder()
 
-console.log(
-    newTree.height(50)
-)
+// console.log(
+//     newTree.height(50)
+// )
 
 console.log(
-    newTree.depth(5)
+    newTree.height2(6345)
 )
+
+
+// console.log(
+//     newTree.depth(5)
+// )
+
+// console.log(
+//     newTree.isBalanced()
+// )
+
+newTree.insert(999)
+newTree.insert(322)
+newTree.insert(321)
+newTree.insert(320)
+newTree.insert(0)
+prettyPrint(newTree.root)
+console.log(
+    newTree.height2(324)
+)
+// console.log(
+//     newTree.isBalanced()
+// )

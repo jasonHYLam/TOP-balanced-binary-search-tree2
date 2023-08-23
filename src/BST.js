@@ -234,6 +234,7 @@ export class Tree {
             else if (value < node.data) return recursiveFind(node.left, value)
         }
 
+        // this ONLY works on a balanced tree, not on a unbalanced tree.
         // recursively traverse the left subtree and find the height, 
         // THEN recursively traverse the right subtree and find the height
         // then return the greater of the two heights
@@ -262,14 +263,58 @@ export class Tree {
         else return leftCounter
     }
 
-    // might be a terrible implementation, but i think i'm gonna use height of value, and then height of root
+    height2(value) {
+        function recursiveFind(node, value) {
+            if (node.data === value) return node;
+            // check if the value exists at leaf or the leaf parents
+            else if (value > node.data && node.right === null) return
+            else if (value < node.data && node.left === null) return
+            else if (value > node.data) return recursiveFind(node.right, value)
+            else if (value < node.data) return recursiveFind(node.left, value)
+        }
+
+        function recursiveTraversal(node, counter = 0, heights = []) {
+            if (node.left == null && node.right == null) heights.push(counter)
+            else {
+                if (node.left) recursiveTraversal(node.left, counter+1, heights)
+                if (node.right) recursiveTraversal(node.right, counter+1, heights)
+            }
+            return Math.max(...heights)
+            
+        }
+        return recursiveTraversal(recursiveFind(this.root, value))
+    }
+
+    // subtract nodeHeight from rootHeight to obtain nodeDepth
     depth(value) {
-        const rootHeight = (this.height(this.root.data))
-        const nodeHeight = (this.height(value))
+        const rootHeight = this.height(this.root.data)
+        const nodeHeight = this.height(value)
         const nodeDepth = rootHeight - nodeHeight;
-        // console.log(nodeDepth)
         return nodeDepth
     }
+
+    // i'm sure this isn't as complicated as i think...
+    // compare height of left subtree, and height right subtree... may need to use recursiveLeft and recursiveRight...
+    // may need to recursively go through each node though
+    isBalanced() {
+        const leftSubtreeHeight = this.height(this.root.left.data)
+        console.log(leftSubtreeHeight)
+        const rightSubtreeHeight = this.height(this.root.right.data)
+        console.log(rightSubtreeHeight)
+        const heightDiff = Math.abs(leftSubtreeHeight - rightSubtreeHeight)
+        console.log(heightDiff)
+        if (heightDiff === 0 || heightDiff === 1) {
+            return true
+        }
+        return false
+    }
+
+    // i think this is simply using levelOrder heh
+    rebalance() {
+        
+    }
+
+
 }
 
 
