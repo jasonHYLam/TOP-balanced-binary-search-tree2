@@ -41,9 +41,6 @@ console.log(
 )
 
 
-// console.log(
-//     newTree.depth(5)
-// )
 
 // console.log(
 //     newTree.isBalanced()
@@ -56,7 +53,13 @@ newTree.insert(320)
 newTree.insert(0)
 prettyPrint(newTree.root)
 console.log(
-    newTree.height2(324)
+    newTree.height2(32477)
+)
+console.log(
+    newTree.depth(5)
+)
+console.log(
+    newTree.height2(5)
 )
 // console.log(
 //     newTree.isBalanced()

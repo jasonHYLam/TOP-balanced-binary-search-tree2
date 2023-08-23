@@ -274,12 +274,17 @@ export class Tree {
         }
 
         function recursiveTraversal(node, counter = 0, heights = []) {
-            if (node.left == null && node.right == null) heights.push(counter)
-            else {
-                if (node.left) recursiveTraversal(node.left, counter+1, heights)
-                if (node.right) recursiveTraversal(node.right, counter+1, heights)
+            try {
+                if (node.left == null && node.right == null) heights.push(counter)
+                else {
+                    if (node.left) recursiveTraversal(node.left, counter+1, heights)
+                    if (node.right) recursiveTraversal(node.right, counter+1, heights)
+                }
+                return Math.max(...heights)
+            } 
+            catch(err) {
+                return ('value not found')
             }
-            return Math.max(...heights)
             
         }
         return recursiveTraversal(recursiveFind(this.root, value))
