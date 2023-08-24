@@ -1,6 +1,6 @@
 # TOP-balanced-binary-search-tree2
 
-
+This repo was created after the previous project encountered webpack errors.
 My approach mainly required recursion rather than iteration.
 
 ## Project Requirements:
