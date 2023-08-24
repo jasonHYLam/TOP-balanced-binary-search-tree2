@@ -249,20 +249,11 @@ export class Tree {
         return recursiveTraversal(recursiveFind(this.root, value))
     }
 
-    // subtract nodeHeight from rootHeight to obtain nodeDepth
-    depth2(value) {
-        const rootHeight = this.height(this.root.data)
-        const nodeHeight = this.height(value)
-        const nodeDepth = rootHeight - nodeHeight;
-        return nodeDepth
-    }
 
     depth(value) {
-        // this might be similar to find, need to introduce a counter...!
+        // this is similar to find, but a counter is introduced
         function recursiveTraversal(node, value, counter=0) {
-            if (node.data === value) {
-                return counter
-            }
+            if (node.data === value) return counter
             else if (node.left == null && node.right == null) console.log('value not found')
             else {
                 if (value < node.data) return recursiveTraversal(node.left, value, counter + 1)
@@ -272,20 +263,27 @@ export class Tree {
         return recursiveTraversal(this.root, value)
     }
 
-    // i'm sure this isn't as complicated as i think...
-    // compare height of left subtree, and height right subtree... may need to use recursiveLeft and recursiveRight...
-    // may need to recursively go through each node though
     isBalanced() {
-        const leftSubtreeHeight = this.height(this.root.left.data)
-        console.log(leftSubtreeHeight)
-        const rightSubtreeHeight = this.height(this.root.right.data)
-        console.log(rightSubtreeHeight)
-        const heightDiff = Math.abs(leftSubtreeHeight - rightSubtreeHeight)
-        console.log(heightDiff)
-        if (heightDiff === 0 || heightDiff === 1) {
-            return true
+
+        // if there's only node.left, or only node.right, then check if it has null on both, else return false
+        function recursiveIsBalanced(node, booleanChecker = []) {
+            // check ends if there are more than 1 extended branch. which means if one branch is 2 or greater height, and the other branch is 0 height
+            if (node.left === null && node.right !== null) {
+                if (node.right.left === null && node.right.right === null) return
+                else booleanChecker.push(false)
+            }
+            else if (node.left !== null && node.right === null) {
+                if (node.left.left === null && node.left.right === null) return
+                else booleanChecker.push(false)
+            }
+            else {
+                if (node.left) recursiveIsBalanced(node.left, booleanChecker)
+                if (node.right) recursiveIsBalanced(node.right, booleanChecker)
+                if (booleanChecker.includes(false)) return false
+                else return true
+            }
         }
-        return false
+        return recursiveIsBalanced(this.root)
     }
 
     // i think this is simply using levelOrder heh

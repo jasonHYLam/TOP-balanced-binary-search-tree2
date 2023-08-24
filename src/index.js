@@ -11,11 +11,11 @@ let newTree = new Tree(testArray)
 console.log(newTree)
 prettyPrint(newTree.root)
 
-newTree.insert(9)
-prettyPrint(newTree.root)
+// newTree.insert(9)
+// prettyPrint(newTree.root)
 
-newTree.delete(323)
-prettyPrint(newTree.root)
+// newTree.delete(323)
+// prettyPrint(newTree.root)
 
 newTree.find(6)
 newTree.find(1)
@@ -46,11 +46,11 @@ newTree.postOrder()
 //     newTree.isBalanced()
 // )
 
-newTree.insert(999)
-newTree.insert(322)
-newTree.insert(321)
-newTree.insert(320)
-newTree.insert(0)
+// newTree.insert(999)
+// newTree.insert(322)
+// newTree.insert(321)
+// newTree.insert(320)
+// newTree.insert(0)
 prettyPrint(newTree.root)
 // console.log(
 //     newTree.height(32477)
@@ -62,5 +62,8 @@ console.log(
 //     newTree.height(5)
 // )
 // console.log(
-//     newTree.isBalanced()
+//     newTree.isBalanced2()
 // )
+console.log(
+    newTree.isBalanced()
+)
