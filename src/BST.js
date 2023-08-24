@@ -129,11 +129,12 @@ export class Tree {
         } else {
             let array = []
             while (queue.length !== 0) {
-            array.push(queue[0]);
+            array.push(queue[0].data);
             if (queue[0].left) queue.push(queue[0].left)
             if (queue[0].right) queue.push(queue[0].right)
             queue.shift()
             }
+            return array;
         }
     }
 
@@ -159,6 +160,7 @@ export class Tree {
                 }
             }
             console.log(recursiveFunction(this.root))
+            return (recursiveFunction(this.root))
 
             // cleaner version; base case is not stated, as do not need to state if null
             // function recursiveTraversal(node) {
@@ -193,6 +195,7 @@ export class Tree {
                     return recursiveValue;
             }
             console.log(recursiveFunction(this.root))
+            return recursiveFunction(this.root)
         }
     }
 
@@ -264,7 +267,6 @@ export class Tree {
     }
 
     isBalanced() {
-
         // if there's only node.left, or only node.right, then check if it has null on both, else return false
         function recursiveIsBalanced(node, booleanChecker = []) {
             // check ends if there are more than 1 extended branch. which means if one branch is 2 or greater height, and the other branch is 0 height
@@ -286,12 +288,13 @@ export class Tree {
         return recursiveIsBalanced(this.root)
     }
 
-    // i think this is simply using levelOrder heh
     rebalance() {
-        
+        if (this.isBalanced) return
+        else {
+            const newArray = (this.inOrder())
+            this.root = buildTree(newArray)
+        }
     }
-
-
 }
 
 

@@ -50,7 +50,7 @@ newTree.postOrder()
 // newTree.insert(322)
 // newTree.insert(321)
 // newTree.insert(320)
-// newTree.insert(0)
+newTree.insert(0)
 prettyPrint(newTree.root)
 // console.log(
 //     newTree.height(32477)
@@ -67,3 +67,7 @@ console.log(
 console.log(
     newTree.isBalanced()
 )
+
+newTree.rebalance();
+
+console.log(newTree.root)
