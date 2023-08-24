@@ -159,7 +159,6 @@ export class Tree {
                     return recursiveValue;
                 }
             }
-            console.log(recursiveFunction(this.root))
             return (recursiveFunction(this.root))
 
             // cleaner version; base case is not stated, as do not need to state if null
@@ -194,12 +193,9 @@ export class Tree {
                     if (node.right) recursiveValue = recursiveValue.concat(recursiveFunction(node.right))
                     return recursiveValue;
             }
-            console.log(recursiveFunction(this.root))
             return recursiveFunction(this.root)
         }
     }
-
-
 
     // traverse the left subtree, then the right subtree, then the root.
     postOrder(helperFunction) {
@@ -221,10 +217,11 @@ export class Tree {
                     recursiveValue = recursiveValue.concat([node.data])
                     return recursiveValue;
             }
-            console.log(recursiveFunction(this.root))
+            return (recursiveFunction(this.root))
         }
     }
 
+    // return the max distance between specified node, and its leaf nodes. 
     height(value) {
         function recursiveFind(node, value) {
             if (node.data === value) return node;
@@ -253,8 +250,8 @@ export class Tree {
     }
 
 
+    // this is similar to find, but a counter is introduced. Returns distance between root and specified node.
     depth(value) {
-        // this is similar to find, but a counter is introduced
         function recursiveTraversal(node, value, counter=0) {
             if (node.data === value) return counter
             else if (node.left == null && node.right == null) console.log('value not found')
@@ -266,10 +263,9 @@ export class Tree {
         return recursiveTraversal(this.root, value)
     }
 
+    // check each node if it only has one branch with a height of two or greater; if so, return false.
     isBalanced() {
-        // if there's only node.left, or only node.right, then check if it has null on both, else return false
         function recursiveIsBalanced(node, booleanChecker = []) {
-            // check ends if there are more than 1 extended branch. which means if one branch is 2 or greater height, and the other branch is 0 height
             if (node.left === null && node.right !== null) {
                 if (node.right.left === null && node.right.right === null) return
                 else booleanChecker.push(false)
@@ -288,8 +284,9 @@ export class Tree {
         return recursiveIsBalanced(this.root)
     }
 
+    // if the tree is unbalanced, rebalance the tree using buildTree().
     rebalance() {
-        if (this.isBalanced) return
+        if (this.isBalanced()) return
         else {
             const newArray = (this.inOrder())
             this.root = buildTree(newArray)
