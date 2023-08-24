@@ -46,3 +46,5 @@ My approach mainly required recursion rather than iteration.
 - Array.concat() does not modify an existing array. To modify an existing array with .concat(), it must be reassigned, like so: array = array.concat(array2)
 
 - There is a difference between incrementing a counter outside of a parameter, and incrementing a counter inside a parameter.
+
+- Height() and Depth() require assigning a counter, and incrementing that counter every time a child node is accessed.
